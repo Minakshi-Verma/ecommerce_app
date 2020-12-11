@@ -79,3 +79,8 @@ npm install
 react-router-dom 
 react-hook-form 
 
+#### how to create store at commerce.js
+- Head to commerce.js and create an account using github/ google or email etc before you create your store.
+- The next thing is you to get the API key( Developer-Settings-Public Key)
+- Create the store instance and pass the API key to create the instance of store
+- You can populate the products, update shipping option ( add international shipping zones etc)on commerce.js by chec website.
