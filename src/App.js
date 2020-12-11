@@ -6,6 +6,7 @@ import {Products, Navbar} from './components'
 
 const App = () => {
     const [products, setProducts] = useState([])
+    const [cart, setCart] = useState({})
 
     // async function to get the datat from the store
     const fetchProducts = async() =>{
@@ -14,16 +15,33 @@ const App = () => {
         setProducts(data)
     }
 
-    // function is called and the state is updated with the data received
+    // function to retrieve the data from the cart
+    const fetchCart = async() => {
+        // cart is the response that we receive here
+        const cart = await commerce.cart.retrieve()
+        setCart(cart)   
+    }
+
+    // Function to add items to the cart
+    
+    const handleAddToCart = async(productId, quantity) =>{
+        const item = await commerce.cart.add(productId, quantity)
+        setCart(item.cart)
+    }
+
+    // function is called in useEffect hook and the state is updated with the data received
     useEffect(()=>{
-        fetchProducts()
+        fetchProducts();
+        fetchCart();
     }, [])
-    console.log(products)
+
+    // console.log("Products==>>",products)
+    console.log("cart==>>",cart)
 
     return (
         <div>
-            <Navbar />
-            <Products products= {products}/>            
+            <Navbar totalItems={cart.total_items} />
+            <Products products= {products} onAddToCart= {handleAddToCart}/>            
         </div>
     )
 }
