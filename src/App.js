@@ -12,6 +12,7 @@ const App = () => {
     const fetchProducts = async() =>{
         // const response = await commerce.products.list()
         const {data} = await commerce.products.list()
+        console.log("data", data)
         setProducts(data)
     }
 
@@ -27,6 +28,7 @@ const App = () => {
     const handleAddToCart = async(productId, quantity) =>{
         const item = await commerce.cart.add(productId, quantity)
         setCart(item.cart)
+        console.log("item added", cart)
     }
 
     // function is called in useEffect hook and the state is updated with the data received
